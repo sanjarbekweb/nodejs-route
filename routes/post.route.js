@@ -2,8 +2,10 @@ import { Router } from 'express'
 
 const router = Router()
 
-router.get('/', (_ , res)=>{
-	res.status(200).send("postslar")
+const post = []
+
+router.get('/', (req  , res)=>{
+	res.status(200).send(post)
 })
 
 router.post('/', (req,res)=>{
@@ -14,7 +16,12 @@ router.post('/', (req,res)=>{
 			return
 		}
 
-		res.status(201).send({posts: {title, img_url}})
+		const newPost = {
+			title,
+			img_url
+		}
+		post.push(newPost)
+		res.status(201).send({posts: newPost})
 	} catch (error) {
 		res.send(error.message)
 	}
